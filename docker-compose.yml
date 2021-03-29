@@ -1,0 +1,59 @@
+version: '3'
+
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile-nginx
+    volumes:
+      - ./symfony/:/var/www/symfony/
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./ssl:/etc/nginx/certs
+    networks:
+      back:
+        ipv4_address: 172.21.0.3
+#      - symfony
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile-php
+    environment:
+      APP_ENV: dev
+    volumes:
+      - ./symfony/:/var/www/symfony/
+    networks:
+      back:
+        ipv4_address: 172.21.0.2
+#      - symfony
+  mysql:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: symfony_db
+    ports:
+      - "3308:3306"
+    networks:
+      back:
+        ipv4_address: 172.21.0.4
+#      - symfony
+  adminer:
+    image: adminer
+    restart: always
+    networks:
+      back:
+        ipv4_address: 172.21.0.5
+    ports:
+      - 8080:8080
+networks:
+  back:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.21.0.0/24
+ #       gateway: 172.21.0.1
+  symfony:
