@@ -20,3 +20,5 @@ Api calls are:
 
 Examples for these calls you can see in screenshots folder.
 
+after installation you can see database via adminer. URL is: http://localhost:8080
+
