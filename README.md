@@ -7,3 +7,16 @@ Please run following commands.
 3. php bin/console doctrine:migrations:migrate
 	yes
 4. exit;
+
+Api calls are:
+
+1. https://localhost/register [POST]
+2. https://localhost/api/login_check [POST]
+3. https://localhost/user/create [POST]
+4. https://localhost/user/edite [POST]
+5. https://localhost/user/delete [POST]
+6. https://localhost/user/view/{email} [GET]
+
+
+Examples for these calls you can see in screenshots folder.
+
