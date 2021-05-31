@@ -5,12 +5,11 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-nginx
-    volumes:
-      - ./symfony/:/var/www/symfony/
     ports:
       - 80:80
       - 443:443
     volumes:
+      - ./symfony/:/var/www/symfony/
       - ./ssl:/etc/nginx/certs
     networks:
       back:
